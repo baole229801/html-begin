@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Work Reminder</title>
+	<style type="text/css">
+		#button-delete {
+		}
+		#delete-item {
+			width: 40px;
+		}	
+	</style>
+</head>
+<body>
+
+	<h1>Work reminder</h1>
+
+	<input type="text" name="input" id="to-do">
+	<button id="button-hit">Add</button>
+	<ol id = 'order-list'>
+		
+	</ol>
+	<!-- <input type="number" name="output" id="delete-item">
+	<button id="button-delete">Delete</button> -->
+
+	<script type="text/javascript">
+
+		var storageKey = 'todo-list';
+		var dataString = localStorage.getItem(storageKey);
+		var toDoList; //= JSON.parse(dataString);
+		var orderList = document.getElementById('order-list');
+
+		var addButton = document.getElementById('button-hit');
+		addButton.addEventListener('click', addItem);
+		orderList.addEventListener('click', onlistClicked);
+		
+		if (dataString) {
+			toDoList = JSON.parse(dataString);
+		} else {
+			toDoList = [];
+		}
+
+		function addItem() {
+			var input = document.getElementById('to-do');
+			toDoList.push(input.value);
+			render();
+			input.value = '';
+
+			localStorage.setItem(storageKey, JSON.stringify(toDoList));
+		}
+
+		function onlistClicked(event) {
+			var button = event.target;
+			var i = parseInt(button.id);
+			toDoList.splice(i, 1);
+			localStorage.setItem(storageKey, JSON.stringify(toDoList));
+			render();
+		}
+		// function deleteItem() {
+		// 	var output = document.getElementById('delete-item');
+		// 	var doneItem = output.value -1;
+		//   	// orderList.removeChild(orderList.childNodes[doneItem-1]);
+		//  	toDoList.splice(doneItem, 1);
+		//  	render();
+		//  	output.value = '';
+
+		//  	localStorage.setItem(storageKey, JSON.stringify(toDoList));
+		// }
+
+		function render() {
+			var content = toDoList.map(function(item, index) {
+				return '<li>' + item + '</li><button data-id="' + index + '">Delete</button>'; 
+			})
+			orderList.innerHTML = content.join('');
+		}
+
+		render();
+	</script>
+
+</body>
+</html>

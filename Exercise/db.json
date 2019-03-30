@@ -1,0 +1,12 @@
+{
+  "todos": [
+    {
+      "content": "Eating Breakfast",
+      "id": 1
+    },
+    {
+      "content": "Going School",
+      "id": 2
+    }
+  ]
+}

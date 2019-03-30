@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Little Work For New Day</title>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+	<h1>Work Reminder</h1>
+
+	<hr/>
+
+	<ol id="in-order">
+		
+	</ol>
+
+	<script type="text/javascript">
+		var orderList = document.getElementById('in-order');
+		var url = 'http://localhost:3000/todos';
+
+		orderList.addEventListener('click', changePage);
+
+		function changePage() {
+			window.location.href = 'add-item.html';
+		}
+
+		function getData() {
+		axios.get(url).then(function(response) {
+			var items = response.data;
+			//console.log(item);
+			render(items);
+		});	
+		}
+
+		function render(items) {
+			var itemData = items.map(function(item) {
+				return "<li>" + item.content + "</li>";
+			});
+			orderList.innerHTML = itemData.join('');
+		}
+
+		getData();
+
+	</script>
+	
+</body>
+</html>

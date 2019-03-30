@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TODO Exercise</title>
+</head>
+<body>
+	<ul id="todo-list"></ul>
+
+	<script type="text/javascript">
+		var todoList = [
+			'Brushing teeth',
+			'Taking shower',
+			'Eating lunch'
+		];
+
+		var htmlList = document.getElementById('todo-list');
+		var content = todoList.map(function(x) {
+			return '<li>' + x + '</li>';
+		});
+
+		//console.log(toDo);
+
+		var toDoString = content.join('');
+		console.log(toDoString);
+		htmlList.innerHTML = toDoString;
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Work Reminder</title>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<style type="text/css">
+		#button-delete {
+		}
+		#delete-item {
+			width: 40px;
+		}	
+	</style>
+</head>
+<body>
+
+	<h1>Work reminder</h1>
+
+	<input type="text" name="input" id="to-do">
+	<button id="button-hit">Add</button>
+	<ol id = 'order-list'>
+		
+	</ol>
+	<input type="number" name="output" id="delete-item">
+	<button id="button-delete">Delete</button>
+
+	<script type="text/javascript">
+		var addButton = document.getElementById('button-hit');
+		addButton.addEventListener('click', addItem);
+		var delButton = document.getElementById('button-delete');
+		delButton.addEventListener('click', deleteItem);
+
+		// var storageKey = 'todo-list';
+		// var dataString = localStorage.getItem(storageKey);
+		// var toDoList; //= JSON.parse(dataString);
+		// var orderList = document.getElementById('order-list');
+		var url = "http://localhost:3000/todos";
+		axios.get(url).then(function(response) {
+			var data = response.data;
+			render(data);
+		})
+		
+		// if (dataString) {
+		// 	toDoList = JSON.parse(dataString);
+		// } else {
+		// 	toDoList = [];
+		// }
+
+		function addItem() {
+			var input = document.getElementById('to-do');
+			var newItem = {content: input.value};
+			//toDoList.push(newItem);
+			axios.post(url, newItem).then(function(response) {
+				console.log(response);
+			})
+
+			render();
+			input.value = '';
+
+			//localStorage.setItem(storageKey, JSON.stringify(toDoList));
+		}
+
+		function deleteItem() {
+			var output = document.getElementById('delete-item');
+			var doneItem = output.value -1;
+		 	// orderList.removeChild(orderList.childNodes[doneItem-1]);
+		 	toDoList.splice(doneItem, 1);
+		 	render();
+		 	output.value = '';
+
+		 	//localStorage.setItem(storageKey, JSON.stringify(toDoList));
+		}
+
+		function render(toDoList) {
+			var orderList = document.getElementById('order-list');
+			var content = toDoList.map(function(item) {
+				return '<li>' + item.content + '</li>'; 
+			})
+			orderList.innerHTML = content.join('');
+		}
+
+		//render();
+	</script>
+
+</body>
+</html>

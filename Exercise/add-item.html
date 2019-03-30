@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit</title>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+	<h1>Tools For You :</h1>
+
+	<input type="text" id="todo-list">
+	<button id="button-add">Add</button>
+	<input type="number" id="del-list">
+	<button id="button-del">Delete</button>
+
+	<hr/>
+
+	<button id="button-back">Back</button>
+
+	<script type="text/javascript">
+		var addBtn = document.getElementById('button-add');
+		var backBtn = document.getElementById('button-back');
+		addBtn.addEventListener('click', addItem);
+		backBtn.addEventListener('click', backPage);
+		var url = 'http://localhost:3000/todos';
+
+		function addItem() {
+			var input = document.getElementById('todo-list');
+			var newItem = {content: input.value};
+
+			axios.post(url, newItem).then(function(response) {
+			console.log(response);
+			});
+
+			//render();
+		}
+
+		function delItem() {
+			var output = document.getElementById('del-list');
+			var delNum = output.value;
+
+			axios.get(url).then(function(response) {
+				var items = response.data;
+				 return newItem = tems.splice(delNum-1, 1);
+			})
+			.then(function() {
+				axios.post(url, newItem);
+			});
+
+
+		}
+
+		function backPage() {
+			window.location.href = './';
+		}
+
+	</script>
+
+</body>
+</html>

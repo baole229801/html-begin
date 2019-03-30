@@ -1,0 +1,45 @@
+<!-- 
+	HTML Element
+	.children (element)
+	.textContent (node) // read and change content of elements
+
+	.appendChild()
+	.remove() 
+	document.createElement()
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>TODO list</title>
+	<style type="text/css">
+		li {
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+
+	<ul id="todo-list">
+		<li>Haircut</li>
+		<li>Lunch with Sora</li>
+		<li>Dinner with Maria</li>
+	</ul>
+
+	<script type="text/javascript">
+		// insert new todo lo the list
+		var todoList = document.getElementById('todo-list');
+
+		var newDo = document.createElement('li');
+		newDo.textContent = 'Sleeping';
+		todoList.appendChild(newDo);
+
+		//update content of a list item
+		var expiredItem = document.getElementById('todo-list');
+		expiredItem.textContent = 'on processing....';
+
+		
+	</script>
+</body>
+</html>

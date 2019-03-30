@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TODO Exercise</title>
+	<style type="text/css">
+		li {
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+
+	<!-- input -->
+	<input type="text" name="todo-thing" id="new-item"/>
+	<!-- button -->
+	<button onclick="addItem()">Add</button>
+	<ul id="todo-list"></ul>
+
+	<script type="text/javascript">
+		var todoList = [
+			'Brushing teeth',
+			'Taking shower',
+			'Eating lunch'
+			];
+
+		function addItem() {
+			// input new content
+			var input = document.getElementById('new-item');
+			// store input value into variable
+			var newToDo = input.value;
+			//
+			todoList.push(newToDo);
+			//re-render
+			render(); 
+			input.value = '';
+		}
+
+
+		var idItem = function getIdButton(clicked_id) {
+						alert(clicked_id);
+						var id = clicked_id;
+						return id;
+					};
+
+		function deleteItem() {
+			var deletedItem = document.getElementById(idItem);
+			console.log(deletedItem);
+			//deletedItem.textContent = ' ';
+		}
+
+		
+		
+
+		function render() {
+			var htmlList = document.getElementById('todo-list');
+			var content = todoList.map(function(x) {
+			return '<li id="' + x + '">' + x + '</li>' + '<button onclick="idItem; deleteItem();" id="' + x + '">' + 'Delete' +'</button>';
+			});
+
+			//console.log(toDo);
+
+			var toDoString = content.join('');
+			console.log(toDoString);
+			htmlList.innerHTML = toDoString;
+		};
+		render();
+	</script>
+
+</body>
+</html>

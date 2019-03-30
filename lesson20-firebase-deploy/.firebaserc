@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "lesson20-firebase-hosting",
+    "default": "lesson20-firebase-hosting"
+  }
+}
